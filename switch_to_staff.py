@@ -52,7 +52,7 @@ def read_users(user_file):
     finally:
         f.close()
 
-# parsing configuration file for API information, number of users and the ID type that we are switching to an internal ID type.
+# parsing configuration file for API information
 config = configparser.ConfigParser()
 config.read(sys.argv[1]) #reads in parameter file
 user_file = sys.argv[2] # reads in file of users
