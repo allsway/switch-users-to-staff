@@ -35,7 +35,7 @@ def parse_user(xml,user_url):
     put_user(xml,user_url)
 
 # Makes a put request to user API with updated ID fields to internal fields
-def put_user(xml,id,user_url):
+def put_user(xml,user_url):
     headers = {"Content-Type": "application/xml"}
     r = requests.put(user_url,data=ET.tostring(xml),headers=headers)
     print (r.content)
@@ -58,4 +58,5 @@ def read_users(user_file):
 config = configparser.ConfigParser()
 config.read(sys.argv[1]) #reads in parameter file
 user_file = sys.argv[2] # reads in file of users
+logging.basicConfig(filename='error.log',level=logging.DEBUG)
 read_users(user_file)
