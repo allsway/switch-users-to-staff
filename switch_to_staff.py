@@ -24,21 +24,19 @@ def get_user_record(id):
     response = requests.get(user_url)
     if response.status_code == 200:
         xml = ET.fromstring(response.content)
-        parse_user(xml,id)
+        parse_user(xml,user_url)
     else:
         logging.info ('failed to get user: ' + user_url)
 
 # Iterates to user ID field and changes segment_type to Internal
-def parse_user(xml,userid):
+def parse_user(xml,user_url):
     record_type = xml.find('record_type')
-    record_type.text = 'STAFF'
-    put_user(xml,userid)
+    record_type.text = 'PUBLIC'
+    put_user(xml,user_url)
 
 # Makes a put request to user API with updated ID fields to internal fields
-def put_user(xml,id):
+def put_user(xml,id,user_url):
     headers = {"Content-Type": "application/xml"}
-    print (id)
-    user_url = get_user_url(id)
     r = requests.put(user_url,data=ET.tostring(xml),headers=headers)
     print (r.content)
 
