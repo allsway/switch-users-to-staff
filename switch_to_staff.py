@@ -26,7 +26,7 @@ def get_user_record(id):
         xml = ET.fromstring(response.content)
         parse_user(xml,user_url)
     else:
-        logging.info ('failed to get user: ' + user_url)
+        logging.info ('Failed to get user: ' + user_url)
 
 # Iterates to user ID field and changes segment_type to Internal
 def parse_user(xml,user_url):
@@ -39,6 +39,8 @@ def put_user(xml,id,user_url):
     headers = {"Content-Type": "application/xml"}
     r = requests.put(user_url,data=ET.tostring(xml),headers=headers)
     print (r.content)
+    if r.status_code != 200:
+        logging.info('Failed to make PUT requets for: ' + user_url)
 
 # Reads in a list of uesr IDs from Alma analytics
 def read_users(user_file):
