@@ -31,7 +31,7 @@ def get_user_record(id):
 # Iterates to user ID field and changes segment_type to Internal
 def parse_user(xml,user_url):
     record_type = xml.find('record_type')
-    record_type.text = 'PUBLIC'
+    record_type.text = 'STAFF'
     put_user(xml,user_url)
 
 # Makes a put request to user API with updated ID fields to internal fields
